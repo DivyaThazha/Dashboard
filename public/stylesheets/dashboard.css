@@ -1,0 +1,170 @@
+.container{
+    width: 100%;
+}
+
+.table-header {
+    font-size: 30px;
+    /* border-bottom: thin solid black; */
+    background-color: #584679;
+    color: white;
+    line-height: 70px;
+    text-align: center;
+}
+
+.table-header span {
+    width: 49%;
+    display: inline-block;
+}
+
+.table-row span {
+    width: 49%;
+    display: inline-block;
+}
+
+div#clusterContent {
+    border: thin solid black;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 1);
+}
+
+#graphs{
+    background-color: #eee;
+}
+
+.tooltip{
+    background-color: white;
+    padding: 10px 10px;
+    color: black;
+    border: 3px solid white;
+    border-radius: 10px;
+    min-width: 280px;
+}
+
+.navbar{
+    color: white;
+}
+
+.tooltipHeader{
+    font-weight: 700;
+}
+
+.table-belowheader {
+    background-color: #7559a6;
+    min-height: 25px;
+}
+
+.table-content {
+    background: #fafafa;
+    color: black;
+    min-height: 450px;
+}
+
+nav.navbar.navbar-inverse{
+    border: none;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+    font-size: 25px;
+    line-height: 35px;
+}
+
+.navbar {
+    min-height: 60px;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #222;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 1);
+}
+
+.panel-default>.panel-heading {
+    color: white;
+    background-color: #222;
+    border-color: black;
+}
+
+.panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border-top-color: black;
+    background-color: white;
+    color: black;
+}
+
+.panel-group .panel+.panel {
+    margin-top: 15px;
+}
+
+span.tabulardata-header-col {
+    width: 25%;
+    display: inline-block;
+}
+
+span.tabulardata-content-col {
+    display: inline-block;
+    width: 25%;
+    line-height: 35px;
+}
+
+span.tabulardata-header-col {
+    width: 25%;
+    display: inline-block;
+    font-size: 20px;
+}
+
+.clusterStatus {
+    background-color: #22cd22;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin-right: 10px;
+    border-radius: 25px;
+}
+
+.clusterStatusInactive {
+    background-color: #d73636;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin-right: 10px;
+    border-radius: 25px;
+}
+
+.rightTooltipContent{
+    width: 70%;
+    display: inline-block;
+}
+
+.navbar-inverse {
+    background-color: #3371e3;
+    margin: -50px -50px 20px;
+    border-color: #080808;
+}
+
+.tabulardata-row {
+    border-bottom: thin solid lightgrey;
+    line-height: 40px;
+}
+
+.tabulardata-conditions .tabulardata-content-col {
+    width: 40%;
+}
+
+.tabulardata-content {
+    padding: 0px 10px;
+}
+
+
+
+.node {
+    fill: steelblue;
+    stroke: none;
+}
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1px;
+}

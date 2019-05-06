@@ -1,0 +1,15 @@
+form.loginFormCard, form.signupFormCustomCard{
+    width: auto;
+}
+.inputFields input.inputWidth{
+    width: 320px;
+}
+
+label.feildName {
+    width: 120px;
+    margin-bottom: 20px;
+}
+
+.btn-primary{
+    background-color:  #6b76ff;
+}

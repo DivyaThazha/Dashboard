@@ -1,0 +1,22 @@
+{
+  "comment": "Network Graph",
+  "nodes": [
+    {
+      "id": "OpenVSwitch",
+      "IP": "192.168.0.20",
+      "role": "router",
+      "memoryUsage": 50,
+      "update": "up",
+      "status" : "True",
+      "root": true
+    }
+
+  ],
+  "edges": [
+    {
+      "source": 1,
+      "target": 0
+    }
+
+  ]
+}
