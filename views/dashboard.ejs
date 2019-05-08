@@ -24,14 +24,15 @@
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
+        <img style="height: 80px; width: 80px; float: left; margin-left: 50px; margin-right: 20px" src="/images/dashboard1.png"/>
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Dashboard</a>
+            <a class="navbar-brand dashboardFont"  href="#" >Cluster Monitoring Dashboard</a>
         </div>
     </div>
 </nav>
@@ -40,15 +41,16 @@
     <div class="container">
         <h2></h2>
         <div class="row">
-           <div class="col-md-7 ">
+            <div class="col-md-6 ">
                 <!--div id="graphs" ></div-->
-                <div id="charts" >
-                </div>
+                <div id="charts" ></div>
             </div>
-            <div class="col-md-5 ">
+            <div class="col-md-6 ">
                 <div id="clusterContent">
+                    <span class="closeWidget" onclick="closeWidgets()">X</span>
                     <div class="table-header widgetHeader">
                     </div>
+
                     <div class="table-belowheader">
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#home"><i class="material-icons" style="font-size:25px">assessment</i></a></li>
@@ -59,10 +61,42 @@
                     <div class="table-content">
                         <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
-                                <h3>HOME</h3>
-                                <p>Some content.</p>
+
+                                <div class="tabheading">Machine Learning Output</div>
+                                <div class="tabulardata">
+                                    <div class="tabulardata-header">
+                                        <span class="tabulardata-content-col" style="width: 22%">SRC_IP</span>
+                                        <span class="tabulardata-content-col" style="width: 15%">SRC_PORT</span>
+                                        <span class="tabulardata-content-col" style="width: 20%">DEST_IP</span>
+                                        <span class="tabulardata-content-col" style="width: 14%">DEST_PORT</span>
+                                        <span class="tabulardata-content-col"  style="width: 11%">SERVICE</span>
+                                        <span class="tabulardata-content-col"  style="width: 10%">OUTPUT</span>
+
+                                    </div>
+                                    <div class="tabulardata-content">
+
+                                    </div>
+                                </div>
+
                             </div>
                             <div id="menu1" class="tab-pane fade">
+
+                                <div class="tabheading">Attacks monitoring</div>
+                                <div class="tabulardata">
+                                    <div class="tabulardata-header">
+                                        <span class="tabulardata-content-col" style="width: 30%">SRC_IP</span>
+                                        <span class="tabulardata-content-col" style="width: 30%">DEST_IP</span>
+                                        <span class="tabulardata-content-col"  style="width: 30%">COUNT</span>
+
+                                    </div>
+                                    <div class="tabulardata-content">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="menu2" class="tab-pane fade">
+
+                                <div class="tabheading">Metrics</div>
                                 <div class="tabulardata tabulardata-conditions" >
                                     <div class="tabulardata-content">
                                         <div class="tabulardata-row">
@@ -87,14 +121,95 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="menu2" class="tab-pane fade">
-                                <h3>Menu 2</h3>
-                                <p>Some content in menu 2.</p>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div id="clusterContentOpenVSwitch">
+                    <span class="closeWidget" onclick="closeWidgets()">X</span>
+                    <div class="table-header widgetHeader">
+                    </div>
+                    <div class="table-belowheader">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#home"><i class="material-icons" style="font-size:25px">assessment</i></a></li>
+                        </ul>
+                    </div>
+                    <div class="table-content">
+                        <div class="tab-content">
+                            <div id="openVHome" class="tab-pane fade in active">
+
+                                <div class="tabheading">OpenVSwitch Statistics</div>
+                                <div class="tabulardata tabulardata-conditions" >
+                                    <div class="tabulardata-content">
+                                        <div class="tabulardata-row">
+                                            <span class="tabulardata-content-col">Port Number</span>
+                                            <span class="tabulardata-content-col tabulardata_port_no">-</span>
+                                        </div>
+                                        <div class="tabulardata-row">
+                                            <span class="tabulardata-content-col">Received Bytes</span>
+                                            <span class="tabulardata-content-col tabulardata_rx_bytes">-</span>
+                                        </div>
+                                        <div class="tabulardata-row">
+                                            <span class="tabulardata-content-col">Received Errors</span>
+                                            <span class="tabulardata-content-col tabulardata_rx_errors">-</span>
+                                        </div>
+                                        <div class="tabulardata-row">
+                                            <span class="tabulardata-content-col">Received Packets</span>
+                                            <span class="tabulardata-content-col tabulardata_rx_packets">-</span>
+                                        </div>
+                                        <div class="tabulardata-row">
+                                            <span class="tabulardata-content-col">Transmitted Bytes</span>
+                                            <span class="tabulardata-content-col tabulardata_tx_bytes">-</span>
+                                        </div>
+                                        <div class="tabulardata-row">
+                                            <span class="tabulardata-content-col">Transmitted Errors</span>
+                                            <span class="tabulardata-content-col tabulardata_tx_errors">-</span>
+                                        </div>
+                                        <div class="tabulardata-row">
+                                            <span class="tabulardata-content-col">Transmitted Packets</span>
+                                            <span class="tabulardata-content-col tabulardata_tx_packets">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="clusterContentKubernetesSDN">
+                    <span class="closeWidget" onclick="closeWidgets()">X</span>
+                    <div class="table-header widgetHeader">
+                    </div>
+
+                    <div class="table-belowheader">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#SDN"><i class="material-icons" style="font-size:25px">assessment</i></a></li>
+                            <li><a data-toggle="tab" href="#slave1"><i class="material-icons" style="font-size:25px">filter_1</i></a></li>
+                            <li><a data-toggle="tab" href="#slave2"><i class="material-icons" style="font-size:25px">filter_2</i></a></li>
+                            <li><a data-toggle="tab" href="#slave3"><i class="material-icons" style="font-size:25px">filter_3</i></a></li>
+                        </ul>
+                    </div>
+                    <div class="table-content">
+                        <div class="tab-content">
+                            <div id="SDN" class="tab-pane fade in active">
+
+                            </div>
+                            <div id="slave1" class="tab-pane fade">
+                                Slave1
+                            </div>
+                            <div id="slave2" class="tab-pane fade">
+                                Slave2
+                            </div>
+                            <div id="slave3" class="tab-pane fade">
+                               Slave3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -157,7 +272,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
+                    <!--div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
@@ -184,7 +299,7 @@
                                 minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                                 commodo consequat.</div>
                         </div>
-                    </div>
+                    </div-->
                 </div>
             </div>
         </div>
@@ -193,19 +308,39 @@
 
 <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
 <script>
-   /* var myCluster = document.getElementById("clusterContent");
+    var myCluster = document.getElementById("clusterContent");
     myCluster.style.display = "none";
+
+    var clusterContentOpenVSwitch = document.getElementById("clusterContentOpenVSwitch");
+    clusterContentOpenVSwitch.style.display = "none";
+
+    var clusterContentKubernetesSDN = document.getElementById("clusterContentKubernetesSDN");
+    clusterContentKubernetesSDN.style.display = "none";
 
     var div = d3.select("body").append("div")
         .attr("class","tooltip")
-        .style("opacity", 0);
+        .style("display", "none");
     var w = 750;
     var h = 600;
     var linkDistance=400;
-    var colors = d3.scale.category10();
-    var svg = d3.select("#graphs").append("svg").attr({"width":w,"height":h});*/
 
-    function sendRequest()
+    var margin = {top: 50, right: 100, bottom: 20, left: 100},
+        width = 800 - margin.right - margin.left,
+        height = 500 - margin.top - margin.bottom;
+    var i = 0;
+    var tree = d3.layout.tree()
+        .size([height, width]);
+
+    var diagonal = d3.svg.diagonal()
+        .projection(function(d) { return [d.x, d.y]; });
+
+    var svg1 = d3.select("#charts").append("svg")
+        .attr("width", width + margin.right + margin.left)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    function sendRequest1()
     {
         console.log("Sending request")
         $.ajax({
@@ -213,161 +348,169 @@
             dataType: 'json',
             type: 'get',
             cache: true,
-            crossDomain : true,
             success: function(resp){
-                console.log(resp.graph);
-                svg.selectAll("*").remove();
-                data = resp.graph;
+                svg1.selectAll("*").remove();
+                data = resp.graph.nodes;
+                console.log(data);
 
-                var force = d3.layout.force()           // Layout Setter.
-                    .nodes(data.nodes)
-                    .links(data.edges)
-                    .size([w,h])
-                    .linkDistance([linkDistance])
-                    .charge([-300])
-                    .theta(0.1)
-                    .gravity(0.05)
-                    .start();
+                // create a name: node map
+                var dataMap = data.reduce(function(map, node) {
+                    map[node.id] = node;
+                    return map;
+                }, {});
 
-                var edges = svg.selectAll("line")       // Edge creator
-                    .data(data.edges)
-                    .enter()
-                    .append("line")
-                    .attr("id",function(d,i) {return 'edge'+i})
-                    //.attr('marker-end','url(#arrowhead)')
-                    .style("stroke","black")
-                    .style("stroke-width","3")
-                    .style("pointer-events", "none");
+                // create the tree array
+                var treeData = [];
+                data.forEach(function(node) {
+                    // add to parent
+                    var parent = dataMap[node.parent];
+                    if (parent) {
+                        // create child array if it doesn't exist
+                        (parent.children || (parent.children = []))
+                        // add node to child array
+                            .push(node);
+                    } else {
+                        // parent is null or missing
+                        treeData.push(node);
+                    }
+                });
 
-                var nodes = svg.selectAll("svg.image")   //Node creator.
-                    .data(data.nodes)
-                    .enter()
-                    .append("image").attr('width', 70).attr('height', 70).attr('xlink:href',function(d){
+                root = treeData[0];
+                root.x0 = height;
+                root.y0 = 0;
+
+                update(root);
+
+                d3.select(self.frameElement).style("height", "500px");
+                function update(source) {
+
+                    // Compute the new tree layout.
+                    var nodes = tree.nodes(root).reverse(),
+                        links = tree.links(nodes);
+
+                    // Normalize for fixed-depth.
+                    nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+                    // Update the nodes…
+                    var node = svg1.selectAll("g.node")
+                        .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+                    // Enter any new nodes at the parent's previous position.
+                    var nodeEnter = node.enter().append("g")
+                        .attr("class", "node")
+                        .attr("transform", function(d) {
+                            return "translate(" + d.x + "," + d.y + ")"; });
+                    //.on("click", click);
+
+                    nodeEnter.append("image").attr('width', 80).attr('height', 80).attr('xlink:href',function(d){
                         var src = d.id == "kubernetes-sdn-master"? "images/cloud.png": d.id=="OpenVSwitch"? "images/router.png":'images/raspberry-pi.png'
                         return src
-                    }).attr("class","clusterimage")
-                    .on("mouseenter", function(d){
-                        //code for status: Red/Green
-                        var status;
-                        if(d.status == "True")
-                           status =  "clusterStatus";
-                        else
-                            status =  "clusterStatusInactive";
-                        //code for Sentence case name
-                        var name;
-                        if(d.id == "OpenVSwitch" || d.id == "kubernetes-sdn-master")
-                            name = d.id;
-                        else
-                            name = d.id.charAt(0).toUpperCase() + d.id.substring(1,d.id.length-2) +" "+d.id.charAt(d.id.length-1) + d.id.charAt(d.id.length);
+                    })
+                        .attr("y", -50)
+                        .attr("dy", ".5em")
+                        .attr("x", function(d) {
+                            return -39})
+                        .on("mouseenter", function(d){
+                            //code for status: Red/Green
+                            d3.select(this).attr('xlink:href',function(d){
+                                var src = d.id == "kubernetes-sdn-master"? "images/cloudH.png": d.id=="OpenVSwitch"? "images/routerH.png":'images/raspberry-piH.png'
+                                return src
+                            });
+                            var status;
+                            if(d.status == "True")
+                                status =  "clusterStatus";
+                            else
+                                status =  "clusterStatusInactive";
+                            //code for Sentence case name
+                            var name;
+                            if(d.id == "OpenVSwitch" || d.id == "kubernetes-sdn-master")
+                                name = d.id;
+                            else
+                                name = d.id.charAt(0).toUpperCase() + d.id.substring(1,d.id.length-2) +" "+d.id.charAt(d.id.length-1) + d.id.charAt(d.id.length);
 
-                        div.transition()
-                            .duration(200)
-                            .style("opacity", 10);
-                        div.html(
-                            "<div class='"+status+"'>"+ "</div>" + "<div class='rightTooltipContent' >"+
-                            "<div class='tooltipHeader'>" + name + "</div>" +
-                            "<div>IP: "   + d.IP   + "</div>" +
-                            "<div class=''>Status: "   + d.status   + "</div>"+
-                            "</div>"
-                        )
-                        div.style("left",(d.x + 110) + "px")
-                            .style("top",(d.y + 70) + "px");
+                            div.transition()
+                                .duration(200)
+                                .style("display", "inline-block")
+                                .style("opacity", 10);
+                            div.html(
+                                "<div class='"+status+"'>"+ "</div>" + "<div class='rightTooltipContent' >"+
+                                "<div class='tooltipHeader'>" + name + "</div>" +
+                                "<div class='tooltipHeaderIP'>"   + d.IP   + "</div>" +
+                                "</div>"
+                            )
+                            div.style("left",(d.x + 220) + "px")
+                                .style("top",(d.y + 110) + "px");
 
-                    })
-                    .on("mouseleave",function(d){
-                        div.style("opacity", 0);
-                    })
-                    .on("mousedown",function(d){
-                        var clicked = d3.select(this);
-                        clicked.attr("stroke-width", 5);
-                    })
-                    .on("click", function (d){
-                        if(d.id != "OpenVSwitch"){
-                            fill_advanced_details_overview(d);
+                        })
+                        .on("mouseleave",function(d){
+                            div.style("display", "none")
+                                .style("opacity", 0);
+                            d3.select(this).attr('xlink:href',function(d){
+                                var src = d.id == "kubernetes-sdn-master"? "images/cloud.png": d.id=="OpenVSwitch"? "images/router.png":'images/raspberry-pi.png'
+                                return src
+                            });
+                        })
+                        .on("click", function (d){
+                            myCluster.style.display = "none";
+                            clusterContentOpenVSwitch.style.display = "none";
+                            clusterContentKubernetesSDN.style.display = "none";
                             fill_widget_conditions(d);
-
-                            if (myCluster.style.display === "none") {
-                                myCluster.style.display = "block";
-                            } else {
-                                myCluster.style.display = "none";
+                            fill_advanced_details_overview(d);
+                            if(d.id == "kubernetes-sdn-master"){
+                                fetch_kubernetes_SDN_pods();
+                                document.querySelector("#clusterContentKubernetesSDN .widgetHeader").innerText = "Kubernetes SDN Master";
+                                clusterContentKubernetesSDN.style.display = "block";
                             }
-                        }
-                    })
-                    .attr({"r":50})
-                    .call(force.drag)
-                    .style("fill",function(d,i){return colors(i);});
+                            else if(d.id == "OpenVSwitch"){
+                                document.querySelector("#clusterContentOpenVSwitch .widgetHeader").innerText = "OpenVSwitch";
+                                clusterContentOpenVSwitch.style.display = "block";
+                            }else{
+                                myCluster.style.display = "block";
+                            }
+                        })
+                        .style("cursor","pointer");
 
-                nodes.attr("y", "1em");
 
-                var nodelabels = svg.selectAll(".nodelabel")  // Adding Labels to the Nodes.
-                    .data(data.nodes)
-                    .enter()
-                    .append("text")
+                    // Declare the links…
+                    var link = svg1.selectAll("path.link")
+                        .data(links, function(d) { return d.target.id; });
 
-                    .attr({"x":function(d){return d.x;},
-                        "y":function(d){return d.y;},
-                        "class":"nodelabel",
-                        "stroke":"blue"})
-                //  .text(function(d){return d.name+d.IP;});
+                    // Enter the links.
+                    link.enter().insert("path", "g")
+                        .attr("class", "link")
+                        .attr("d", diagonal);
 
-                var edgepaths = svg.selectAll(".edgepath")   // Adding edge edgepaths
-                    .data(data.edges)
-                    .enter()
-                    .append('path')
-                    .attr({'d': function(d) {return 'M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y},
-                        'class':'edgepath',
-                        'fill-opacity':0,
-                        'stroke-opacity':0,
-                        'fill':'blue',
-                        'stroke':'red',
-                        'id':function(d,i) {return 'edgepath'+i}})
-                    .style("pointer-events", "none");
-
-                svg.append('defs').append('marker')      //SVG Attributes.
-                    .attr({'id':'arrowhead',
-                        'viewBox':'-0 -5 10 10',
-                        'refX':25,
-                        'refY':0,
-                        //'markerUnits':'strokeWidth',
-                        'orient':'auto',
-                        'markerWidth':10,
-                        'markerHeight':10,
-                        'xoverflow':'visible'})
-                    .append('svg:path')
-                    .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
-                    .attr('fill', '#080808')
-                    .attr('stroke','#080808');
-
-                force.on("tick", function(){
-                    edges.attr({"x1": function(d){return d.source.x;},
-                        "y1": function(d){return d.source.y;},
-                        "x2": function(d){return d.target.x;},
-                        "y2": function(d){return d.target.y;}});
-
-                    nodes.attr({"x":function(d){
-                            return d.x-25;
-                        },
-                        "y":function(d){
-                            return d.y-20;
-                    }});
-
-                    nodelabels.attr("x", function(d) { return d.x; })
-                        .attr("y", function(d) { return d.y; });
-
-                    edgepaths.attr('d', function(d) { var path='M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y;
-                        return path});
-                });
-                //      }// if ends
-                // });// function(index,value) ends here
-            },
-            error : function(request,error)
-            {
-                console.log("Request: "+JSON.stringify(request));
+                }
             }
 
         });
     }
-    //sendRequest();
+    sendRequest1();
+
+    function fetch_continuos_output_data(input) {
+        console.log(input.id);
+
+        $.ajax({
+            url: 'http://localhost:5000/fetch_output_data',
+            dataType: 'json',
+            data: {
+                node: input.id
+            },
+            type: 'get',
+            cache: true,
+            crossDomain: true,
+            success: function (resp) {
+                //console.log(resp);
+                fill_widget_continuous_output(resp.output);
+                fill_widget_continuous_attack(resp.attack);
+                fill_widget_openVSwitch(resp.openv_result);
+            },
+            error : function(request,error)
+            {
+                console.log("ERROR Request: "+JSON.stringify(request));
+            }
+        });
+    }
 
     function fill_advanced_details_overview(d){
         console.log(d);
@@ -383,7 +526,12 @@
     }
 
     function fill_widget_conditions(d) {
-        document.getElementsByClassName("tabulardata_networkAvailable")[0].innerText = d.condition_NetworkUnavailable;
+
+        fetch_continuos_output_data(d);
+        if(d.condition_NetworkUnavailable == "False")
+            document.getElementsByClassName("tabulardata_networkAvailable")[0].innerHTML = '<i class="material-icons" style="color:green; font-size:25px; padding-top: 5px">check_circle</i><div>Network is available</div>';
+        else
+            document.getElementsByClassName("tabulardata_networkAvailable")[0].innerHTML = '<div><i class="material-icons" style="font-size:25px">error</i>Network is not available</div>';
         document.getElementsByClassName("tabulardata_memoryPressure")[0].innerText = d.condition_MemoryPressure;
         document.getElementsByClassName("tabulardata_diskPressure")[0].innerText = d.condition_DiskPressure;
         document.getElementsByClassName("tabulardata_PIDPressure")[0].innerText = d.condition_PIDPressure;
@@ -398,120 +546,167 @@
         document.getElementsByClassName("widgetHeader")[0].innerText = name;
 
     }
+
+    function fill_widget_continuous_output(d) {
+
+        var rows = "";
+        for (var j = 0; j < d.length && j < 50; j++) {
+            rows += '<div class="tabulardata-row">'
+            rows += '<span class="tabulardata-content-col tabulardata_src_ip">' +d[j]['src_ip'] + '</span>'
+            rows += '<span class="tabulardata-content-col tabulardata_src_port">' +d[j]['src_port'] + '</span>'
+            rows += '<span class="tabulardata-content-col tabulardata_dst_ip">' +d[j]['dst_ip'] + '</span>'
+            rows += '<span class="tabulardata-content-col tabulardata_dst_port">' +d[j]['dst_port'] + '</span>'
+            rows += '<span class="tabulardata-content-col tabulardata_service">' +d[j]['service'] + '</span>'
+            rows += '<span class="tabulardata-content-col tabulardata_output">' +d[j]['result'][0] + '</span>'
+            rows += '</div>'
+        }
+        $("#home .tabulardata-content").html(
+            '<div class="tabulardata-row">' + rows +  ' </div>'
+        );
+    }
+
+    function fill_widget_continuous_attack(d) {
+        var rows = "";
+        for (var j = 0; j < d.length && j < 50; j++) {
+            var src = d[j]['id'].substring(0, d[j]['id'].indexOf('-')) ;
+            var dest = d[j]['id'].substring(d[j]['id'].indexOf('-') + 1, d[j]['id'].length) ;;
+            rows += '<div class="tabulardata-row">'
+            rows += '<span class="tabulardata-content-col tabulardata_src_ip">' + src + '</span>'
+            rows += '<span class="tabulardata-content-col tabulardata_dst_ip">' + dest + '</span>'
+            rows += '<span class="tabulardata-content-col tabulardata_dst_port">' +d[j]['count'] + '</span>'
+            rows += '</div>'
+        }
+        $("#menu1 .tabulardata-content").html(
+            '<div class="tabulardata-row">' + rows +  ' </div>'
+        );
+    }
+
+    function fill_widget_openVSwitch(d) {
+        d = d[0];
+        console.log(d);
+        document.getElementsByClassName("tabulardata_port_no")[0].innerText = d.port_no;
+        document.getElementsByClassName("tabulardata_rx_bytes")[0].innerText = d.rx_bytes;
+        document.getElementsByClassName("tabulardata_rx_errors")[0].innerText = d.rx_errors;
+        document.getElementsByClassName("tabulardata_rx_packets")[0].innerText = d.rx_packets;
+        document.getElementsByClassName("tabulardata_tx_bytes")[0].innerText = d.tx_bytes;
+        document.getElementsByClassName("tabulardata_tx_errors")[0].innerText = d.tx_errors;
+        document.getElementsByClassName("tabulardata_tx_packets")[0].innerText = d.tx_packets;
+    }
+
+    function fetch_kubernetes_SDN_pods(){
+        $.ajax({
+            url: 'http://localhost:5000/kube-api/pods',
+            dataType: 'json',
+            type: 'get',
+            cache: true,
+            crossDomain: true,
+            success: function (resp) {
+                fill_widget_kubernetes_SDN(resp.pods);
+            },
+            error : function(request,error)
+            {
+                console.log("ERROR Request: "+JSON.stringify(request));
+            }
+        });
+    }
+    
+    function fill_widget_kubernetes_SDN(pods) {
+        var sdn_rows = "";
+        var slave1_rows = "";
+        var slave2_rows = "";
+        var slave3_rows = "";
+        for(var i=0; i<pods.length; i++){
+            if(pods[i].node == "kubernetes-sdn-master"){
+                console.log("SDN");
+                sdn_rows += '<div class="tabulardata-header">'+ pods[i].container_name +'</div>';
+                sdn_rows += '<div class="tabulardata-content">';
+                sdn_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Pod IP</span>';
+                sdn_rows += '<span class="tabulardata-content-col tabulardata_pod_ip">'+ pods[i].pod_ip +'</span>  </div>';
+                sdn_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Protocol</span>';
+                sdn_rows += '<span class="tabulardata-content-col tabulardata_protocol">'+ pods[i].protocol +'</span>  </div>';
+                sdn_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Start time</span>';
+                sdn_rows += '<span class="tabulardata-content-col tabulardata_start_time">'+ pods[i].start_time +'</span>  </div>';
+                sdn_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Container port</span>';
+                sdn_rows += '<span class="tabulardata-content-col tabulardata_container_port">'+ pods[i].container_port +'</span>  </div>';
+                sdn_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Namespace</span>';
+                sdn_rows += '<span class="tabulardata-content-col tabulardata_namespace">'+ pods[i].namespace +'</span>  </div>';
+                sdn_rows += '</div>';
+            }
+            else if(pods[i].node == "slave01"){
+                console.log("Salve01")
+                slave1_rows += '<div class="tabulardata-header">'+ pods[i].container_name +'</div>';
+                slave1_rows += '<div class="tabulardata-content">';
+                slave1_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Pod IP</span>';
+                slave1_rows += '<span class="tabulardata-content-col tabulardata_pod_ip">'+ pods[i].pod_ip +'</span>  </div>';
+                slave1_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Protocol</span>';
+                slave1_rows += '<span class="tabulardata-content-col tabulardata_protocol">'+ pods[i].protocol +'</span>  </div>';
+                slave1_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Start time</span>';
+                slave1_rows += '<span class="tabulardata-content-col tabulardata_start_time">'+ pods[i].start_time +'</span>  </div>';
+                slave1_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Container port</span>';
+                slave1_rows += '<span class="tabulardata-content-col tabulardata_container_port">'+ pods[i].container_port +'</span>  </div>';
+                slave1_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Namespace</span>';
+                slave1_rows += '<span class="tabulardata-content-col tabulardata_namespace">'+ pods[i].namespace +'</span>  </div>';
+                slave1_rows += '</div>';
+            }
+            else if(pods[i].node == "slave02"){
+                console.log("Salve02")
+                slave2_rows += '<div class="tabulardata-header">'+ pods[i].container_name +'</div>';
+                slave2_rows += '<div class="tabulardata-content">';
+                slave2_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Pod IP</span>';
+                slave2_rows += '<span class="tabulardata-content-col tabulardata_pod_ip">'+ pods[i].pod_ip +'</span>  </div>';
+                slave2_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Protocol</span>';
+                slave2_rows += '<span class="tabulardata-content-col tabulardata_protocol">'+ pods[i].protocol +'</span>  </div>';
+                slave2_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Start time</span>';
+                slave2_rows += '<span class="tabulardata-content-col tabulardata_start_time">'+ pods[i].start_time +'</span>  </div>';
+                slave2_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Container port</span>';
+                slave2_rows += '<span class="tabulardata-content-col tabulardata_container_port">'+ pods[i].container_port +'</span>  </div>';
+                slave2_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Namespace</span>';
+                slave2_rows += '<span class="tabulardata-content-col tabulardata_namespace">'+ pods[i].namespace +'</span>  </div>';
+                slave2_rows += '</div>';
+            }
+            else if(pods[i].node == "slave03"){
+                console.log("Salve03")
+                slave3_rows += '<div class="tabulardata-header">'+ pods[i].container_name +'</div>';
+                slave3_rows += '<div class="tabulardata-content">';
+                slave3_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Pod IP</span>';
+                slave3_rows += '<span class="tabulardata-content-col tabulardata_pod_ip">'+ pods[i].pod_ip +'</span>  </div>';
+                slave3_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Protocol</span>';
+                slave3_rows += '<span class="tabulardata-content-col tabulardata_protocol">'+ pods[i].protocol +'</span>  </div>';
+                slave3_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Start time</span>';
+                slave3_rows += '<span class="tabulardata-content-col tabulardata_start_time">'+ pods[i].start_time +'</span>  </div>';
+                slave3_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Container port</span>';
+                slave3_rows += '<span class="tabulardata-content-col tabulardata_container_port">'+ pods[i].container_port +'</span>  </div>';
+                slave3_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Namespace</span>';
+                slave3_rows += '<span class="tabulardata-content-col tabulardata_namespace">'+ pods[i].namespace +'</span>  </div>';
+                slave3_rows += '</div>';
+            }
+        }
+
+        $("#SDN").html(
+            '<div class="tabulardataSDN"><div class="tabheading">Kubernetes Master Pod Info </div>' + sdn_rows +  ' </div>'
+        );
+
+        $("#slave1").html(
+            '<div class="tabulardataSDN"><div class="tabheading">Slave 01 Pod Info </div>' + slave1_rows +  ' </div>'
+        );
+
+        $("#slave2").html(
+            '<div class="tabulardataSDN"><div class="tabheading">Slave 02 Pod Info </div>' + slave2_rows +  ' </div>'
+        );
+
+        $("#slave3").html(
+            '<div class="tabulardataSDN"><div class="tabheading">Slave 03 Pod Info </div>' + slave3_rows +  ' </div>'
+        );
+    }
+
+    function closeWidgets() {
+        myCluster.style.display = "none";
+        clusterContentOpenVSwitch.style.display = "none";
+        clusterContentKubernetesSDN.style.display = "none";
+    }
+
+
     //setInterval('sendRequest()', 50000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   var data = [
-       { "name" : "Level 2: A", "parent":"Top Level" },
-       { "name" : "Top Level", "parent":"null" },
-       { "name" : "Son of A", "parent":"Level 2: A" },
-       { "name" : "Daughter of A", "parent":"Level 2: A" },
-       { "name" : "Level 2: B", "parent":"Top Level" }
-   ];
-
-   // *********** Convert flat data into a nice tree ***************
-   // create a name: node map
-   var dataMap = data.reduce(function(map, node) {
-       map[node.name] = node;
-       return map;
-   }, {});
-
-   // create the tree array
-   var treeData = [];
-   data.forEach(function(node) {
-       // add to parent
-       var parent = dataMap[node.parent];
-       if (parent) {
-           // create child array if it doesn't exist
-           (parent.children || (parent.children = []))
-           // add node to child array
-               .push(node);
-       } else {
-           // parent is null or missing
-           treeData.push(node);
-       }
-   });
-
-   // ************** Generate the tree diagram	 *****************
-   var margin = {top: 40, right: 120, bottom: 20, left: 120},
-       width = 960 - margin.right - margin.left,
-       height = 500 - margin.top - margin.bottom;
-
-   var i = 0;
-
-   var tree = d3.layout.tree()
-       .size([height, width]);
-
-   var diagonal = d3.svg.diagonal()
-       .projection(function(d) { return [d.x, d.y]; });
-
-   var svg = d3.select("#charts").append("svg")
-       .attr("width", width + margin.right + margin.left)
-       .attr("height", height + margin.top + margin.bottom)
-       .append("g")
-       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-   root = treeData[0];
-
-   update(root);
-
-   function update(source) {
-
-       // Compute the new tree layout.
-       var nodes = tree.nodes(root).reverse(),
-           links = tree.links(nodes);
-
-       // Normalize for fixed-depth.
-       nodes.forEach(function(d) { d.y = d.depth * 100; });
-
-       // Declare the nodes…
-       var node = svg.selectAll("g.node")
-           .data(nodes, function(d) { return d.id || (d.id = ++i); });
-
-       // Enter the nodes.
-       var nodeEnter = node.enter().append("g")
-           .attr("class", "node")
-           .attr("transform", function(d) {
-               return "translate(" + d.x + "," + d.y + ")"; });
-
-       nodeEnter.append("circle")
-           .attr("r", 10)
-           .style("fill", "#fff");
-
-       nodeEnter.append("text")
-           .attr("y", function(d) {
-               return d.children || d._children ? -18 : 18; })
-           .attr("dy", ".35em")
-           .attr("text-anchor", "middle")
-           .text(function(d) { return d.name; })
-           .style("fill-opacity", 1);
-
-       // Declare the links…
-       var link = svg.selectAll("path.link")
-           .data(links, function(d) { return d.target.id; });
-
-       // Enter the links.
-       link.enter().insert("path", "g")
-           .attr("class", "link")
-           .attr("d", diagonal);
-
-   }
-
-
 
 </script>
 </body>

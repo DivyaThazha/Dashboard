@@ -8,7 +8,14 @@
       "memoryUsage": 50,
       "update": "up",
       "status" : "True",
-      "root": true
+      "root": true,
+      "architecture": "amd64",
+      "creation_timestamp": "Thu, 02 May 2019 00:08:27 GMT",
+      "machineID": "5f5999e547a74e8ba126e84fafdf4645",
+      "kernel_version": "4.10.0-42-generic",
+      "operating_system": "linux",
+      "os_image": "Ubuntu 16.04.5 LTS",
+      "parent": "kubernetes-sdn-master"
     }
 
   ],

@@ -21,7 +21,7 @@
     display: inline-block;
 }
 
-div#clusterContent {
+div#clusterContent, div#clusterContentOpenVSwitch, div#clusterContentKubernetesSDN {
     border: thin solid black;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 1);
 }
@@ -45,6 +45,8 @@ div#clusterContent {
 
 .tooltipHeader{
     font-weight: 700;
+    font-size: 15px;
+    line-height: 25px;
 }
 
 .table-belowheader {
@@ -138,7 +140,7 @@ span.tabulardata-header-col {
 }
 
 .navbar-inverse {
-    background-color: #3371e3;
+    background-color: #b2c6ee;
     margin: -50px -50px 20px;
     border-color: #080808;
 }
@@ -165,6 +167,113 @@ span.tabulardata-header-col {
 
 .link {
     fill: none;
-    stroke: #ccc;
-    stroke-width: 1px;
+    stroke: black;
+    stroke-width: 3px;
+}
+
+
+.tabulardata-content {
+    padding: 0px 10px;
+    height: 397px;
+    overflow-y: auto;
+}
+
+#clusterContent, #clusterContentOpenVSwitch, #clusterContentKubernetesSDN{
+    display: block;
+    height: 563px;
+    margin-bottom: 20px;
+}
+
+.tabulardata-header {
+    font-weight: 600;
+    color: white;
+    background-color: darkgray;
+}
+
+#home span.tabulardata-content-col.tabulardata_src_ip, #home .tabulardata-content-col.tabulardata_dst_ip{
+    width: 23%;
+}
+
+#home .tabulardata-content-col.tabulardata_src_port, #home .tabulardata-content-col.tabulardata_dst_port{
+    width: 15%;
+}
+
+#home .tabulardata-content-col.tabulardata_service{
+    width: 12%;
+}
+
+#home .tabulardata-content-col.tabulardata_output{
+    width: 10%;
+}
+
+
+#home span.tabulardata-content-col {
+    display: inline-block;
+    width: 18%;
+    line-height: 35px;
+}
+
+
+#menu1 span.tabulardata-content-col.tabulardata_src_ip, #menu1 .tabulardata-content-col.tabulardata_dst_ip{
+    width: 31%;
+}
+
+span.closeWidget {
+    display: inline-block;
+    position: absolute;
+    font-size: 23px;
+    color: white;
+    cursor: pointer;
+    right: 30px;
+}
+
+.tabheading{
+    font-size: 22px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.tabulardataSDN .tabulardata-content {
+    height: auto;
+}
+
+.tabulardataSDN {
+    height: 420px;
+    overflow-y: auto;
+}
+
+#clusterContent .table-header{
+    background-color: #b71c1c
+}
+
+#clusterContent .table-belowheader{
+    background-color: #d34e4e
+}
+
+#clusterContentKubernetesSDN .table-header{
+    background-color: #0d47a1
+}
+
+#clusterContentKubernetesSDN .table-belowheader{
+    background-color: #1e88e5
+}
+
+#clusterContentOpenVSwitch .table-header{
+    background-color: #0c9e8f
+}
+
+#clusterContentOpenVSwitch .table-belowheader{
+    background-color: #3fe0d0
+}
+
+.tooltipHeaderIP {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.navbar-inverse .navbar-brand.dashboardFont{
+    font-family: 'Baloo Bhai', cursive;
+    font-size: 40px;
+    line-height: 50px;
+    color: black;
 }
