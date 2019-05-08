@@ -140,7 +140,7 @@ span.tabulardata-header-col {
 }
 
 .navbar-inverse {
-    background-color: #b2c6ee;
+    background-color: rgba(46, 40, 79, 0.88);
     margin: -50px -50px 20px;
     border-color: #080808;
 }
@@ -187,7 +187,8 @@ span.tabulardata-header-col {
 .tabulardata-header {
     font-weight: 600;
     color: white;
-    background-color: darkgray;
+    background-color: #474545;
+    padding-left: 10px;
 }
 
 #home span.tabulardata-content-col.tabulardata_src_ip, #home .tabulardata-content-col.tabulardata_dst_ip{
@@ -235,6 +236,9 @@ span.closeWidget {
 
 .tabulardataSDN .tabulardata-content {
     height: auto;
+    padding: 0px 10px;
+    border: thin solid lightgrey;
+    margin: 0px 10px 10px;
 }
 
 .tabulardataSDN {
@@ -275,5 +279,50 @@ span.closeWidget {
     font-family: 'Baloo Bhai', cursive;
     font-size: 40px;
     line-height: 50px;
-    color: black;
+    color: white;
+}
+
+.tabulardataSDN .tabulardata-header {
+    margin: 0px 10px;
+    padding: 0px 10px;
+    background-color: #474545;
+    height: 35px;
+}
+
+span.tabulardata-content-col.tabulardata_start_time {
+    width: 50%;
+}
+
+span.tabulardata_text {
+    padding-bottom: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.badge-success {
+    color: #fff;
+    background-color: #a3d32e;
+    margin-bottom: 15px;
+}
+
+.badge-info {
+    color: #fff;
+    background-color: #17a2b8;
+    margin-bottom: 15px;
+}
+
+span.metricsText {
+    display: inline-block;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+.metricsC {
+    height: 30px;
+    display: inline-flex;
+}
+
+span.tabulardata-content-col.tabulardata-content-col_label {
+    width: 20%;
 }

@@ -3343,7 +3343,7 @@ var pods = {
             "pod_ip": "10.32.0.13",
             "protocol": "TCP",
             "start_time": "Thu, 02 May 2019 02:14:21 GMT",
-            "terminated": null,
+            "terminated": false,
             "timestamp": "Thu, 02 May 2019 02:14:18 GMT",
             "waiting": null
         },
@@ -3733,7 +3733,7 @@ var pods = {
             "pod_ip": "192.168.1.5",
             "protocol": null,
             "start_time": "Tue, 07 May 2019 21:23:03 GMT",
-            "terminated": null,
+            "terminated": false,
             "timestamp": "Thu, 02 May 2019 00:15:25 GMT",
             "waiting": null
         },
@@ -3823,7 +3823,7 @@ var pods = {
             "pod_ip": "10.42.0.4",
             "protocol": null,
             "start_time": "Tue, 07 May 2019 19:43:25 GMT",
-            "terminated": null,
+            "terminated": false,
             "timestamp": "Thu, 02 May 2019 01:50:17 GMT",
             "waiting": null
         },
@@ -3838,7 +3838,7 @@ var pods = {
             "pod_ip": "10.44.0.5",
             "protocol": null,
             "start_time": "Tue, 07 May 2019 19:57:52 GMT",
-            "terminated": null,
+            "terminated": false,
             "timestamp": "Thu, 02 May 2019 01:50:17 GMT",
             "waiting": null
         },

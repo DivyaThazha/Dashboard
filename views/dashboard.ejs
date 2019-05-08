@@ -30,7 +30,7 @@
 <body>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <img style="height: 80px; width: 80px; float: left; margin-left: 50px; margin-right: 20px" src="/images/dashboard1.png"/>
+        <img style="height: 80px; width: 100px; float: left; margin-left: 50px; margin-right: 20px" src="/images/dashboard3.png"/>
         <div class="navbar-header">
             <a class="navbar-brand dashboardFont"  href="#" >Cluster Monitoring Dashboard</a>
         </div>
@@ -65,9 +65,9 @@
                                 <div class="tabheading">Machine Learning Output</div>
                                 <div class="tabulardata">
                                     <div class="tabulardata-header">
-                                        <span class="tabulardata-content-col" style="width: 22%">SRC_IP</span>
-                                        <span class="tabulardata-content-col" style="width: 15%">SRC_PORT</span>
-                                        <span class="tabulardata-content-col" style="width: 20%">DEST_IP</span>
+                                        <span class="tabulardata-content-col" style="width: 21%">SRC_IP</span>
+                                        <span class="tabulardata-content-col" style="width: 14%">SRC_PORT</span>
+                                        <span class="tabulardata-content-col" style="width: 21%">DEST_IP</span>
                                         <span class="tabulardata-content-col" style="width: 14%">DEST_PORT</span>
                                         <span class="tabulardata-content-col"  style="width: 11%">SERVICE</span>
                                         <span class="tabulardata-content-col"  style="width: 10%">OUTPUT</span>
@@ -96,29 +96,30 @@
                             </div>
                             <div id="menu2" class="tab-pane fade">
 
-                                <div class="tabheading">Metrics</div>
+                                <div class="tabheading">System Health</div>
                                 <div class="tabulardata tabulardata-conditions" >
                                     <div class="tabulardata-content">
                                         <div class="tabulardata-row">
-                                            <span class="tabulardata-content-col">Network Available</span>
+                                            <span class="tabulardata-content-col tabulardata-content-col_label"><span class="badge badge-success">STATUS</span></span>
+                                            <span class="tabulardata-content-col tabulardata_Ready">-</span>
+                                        </div>
+                                        <div class="tabulardata-row">
+                                            <span class="tabulardata-content-col tabulardata-content-col_label"><span class="badge badge-info">INFO</span></span>
                                             <span class="tabulardata-content-col tabulardata_networkAvailable">-</span>
                                         </div>
                                         <div class="tabulardata-row">
-                                            <span class="tabulardata-content-col">Memory Pressure</span>
+                                            <span class="tabulardata-content-col tabulardata-content-col_label"><span class="badge badge-info">INFO</span></span>
                                             <span class="tabulardata-content-col tabulardata_memoryPressure">-</span>
                                         </div>
                                         <div class="tabulardata-row">
-                                            <span class="tabulardata-content-col">Disk Pressure</span>
+                                            <span class="tabulardata-content-col tabulardata-content-col_label"><span class="badge badge-info">INFO</span></span>
                                             <span class="tabulardata-content-col tabulardata_diskPressure">-</span>
                                         </div>
                                         <div class="tabulardata-row">
-                                            <span class="tabulardata-content-col">PID Pressure</span>
+                                            <span class="tabulardata-content-col tabulardata-content-col_label"><span class="badge badge-info">INFO</span></span>
                                             <span class="tabulardata-content-col tabulardata_PIDPressure">-</span>
                                         </div>
-                                        <div class="tabulardata-row">
-                                            <span class="tabulardata-content-col">Current Status</span>
-                                            <span class="tabulardata-content-col tabulardata_Ready">-</span>
-                                        </div>
+
                                     </div>
                                 </div>
 
@@ -303,6 +304,9 @@
                 </div>
             </div>
         </div>
+
+        <div id="real_time_chart_slave01_cpu" class="dashboard-flot-chart"></div>
+
     </div>
 </section>
 
@@ -528,14 +532,32 @@
     function fill_widget_conditions(d) {
 
         fetch_continuos_output_data(d);
+        if(d.condition_Ready == "True")
+            document.getElementsByClassName("tabulardata_Ready")[0].innerHTML = '<div class="metricsC"><i class="material-icons" style="color:green; font-size:25px; padding-top: 5px">check_circle</i><span class="metricsText">System is up and running</span></div>';
+        else
+            document.getElementsByClassName("tabulardata_Ready")[0].innerHTML = '<div><i class="material-icons" style="font-size:25px">error</i>System is down</div>';
+
+
         if(d.condition_NetworkUnavailable == "False")
-            document.getElementsByClassName("tabulardata_networkAvailable")[0].innerHTML = '<i class="material-icons" style="color:green; font-size:25px; padding-top: 5px">check_circle</i><div>Network is available</div>';
+            document.getElementsByClassName("tabulardata_networkAvailable")[0].innerHTML = '<div class="metricsC"><i class="material-icons" style="color:green; font-size:25px; padding-top: 5px">check_circle</i><span class="metricsText">Network is available</span></div>';
         else
             document.getElementsByClassName("tabulardata_networkAvailable")[0].innerHTML = '<div><i class="material-icons" style="font-size:25px">error</i>Network is not available</div>';
-        document.getElementsByClassName("tabulardata_memoryPressure")[0].innerText = d.condition_MemoryPressure;
-        document.getElementsByClassName("tabulardata_diskPressure")[0].innerText = d.condition_DiskPressure;
-        document.getElementsByClassName("tabulardata_PIDPressure")[0].innerText = d.condition_PIDPressure;
-        document.getElementsByClassName("tabulardata_Ready")[0].innerText = d.condition_Ready;
+
+        if(d.condition_MemoryPressure == "False")
+            document.getElementsByClassName("tabulardata_memoryPressure")[0].innerHTML = '<div class="metricsC"><i class="material-icons" style="color:green; font-size:25px; padding-top: 5px">check_circle</i><span class="metricsText">Memory pressure is normal</span></div>';
+        else
+            document.getElementsByClassName("tabulardata_memoryPressure")[0].innerHTML = '<div><i class="material-icons" style="font-size:25px">error</i>Memory pressure is not normal</div>';
+
+        if(d.condition_DiskPressure == "False")
+            document.getElementsByClassName("tabulardata_diskPressure")[0].innerHTML = '<div class="metricsC"><i class="material-icons" style="color:green; font-size:25px; padding-top: 5px">check_circle</i><span class="metricsText">Disk pressure is normal</span></div>';
+        else
+            document.getElementsByClassName("tabulardata_diskPressure")[0].innerHTML = '<div><i class="material-icons" style="font-size:25px">error</i>Disk pressure is not normal</div>';
+
+        if(d.condition_PIDPressure == "False")
+            document.getElementsByClassName("tabulardata_PIDPressure")[0].innerHTML = '<div class="metricsC"><i class="material-icons" style="color:green; font-size:25px; padding-top: 5px">check_circle</i><span class="metricsText">PID pressure is normal</span></div>';
+        else
+            document.getElementsByClassName("tabulardata_PIDPressure")[0].innerHTML = '<div><i class="material-icons" style="font-size:25px">error</i>PID pressure is not normal</div>';
+
 
         var name;
         if( d.id == "kubernetes-sdn-master")
@@ -617,8 +639,10 @@
         var slave3_rows = "";
         for(var i=0; i<pods.length; i++){
             if(pods[i].node == "kubernetes-sdn-master"){
-                console.log("SDN");
-                sdn_rows += '<div class="tabulardata-header">'+ pods[i].container_name +'</div>';
+                if(pods[i].terminated == null)
+                    sdn_rows += '<div class="tabulardata-header"><i class="material-icons" style="color:green; font-size:25px; padding-top: 5px">check_circle</i><span class="tabulardata_text">'+ pods[i].container_name +'</span></div>';
+                else
+                    sdn_rows += '<div class="tabulardata-header"><i class="material-icons" style="color:#cf2323; font-size:25px; padding-top: 5px">error</i><span class="tabulardata_text">'+ pods[i].container_name +'</span></div>';
                 sdn_rows += '<div class="tabulardata-content">';
                 sdn_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Pod IP</span>';
                 sdn_rows += '<span class="tabulardata-content-col tabulardata_pod_ip">'+ pods[i].pod_ip +'</span>  </div>';
@@ -630,11 +654,18 @@
                 sdn_rows += '<span class="tabulardata-content-col tabulardata_container_port">'+ pods[i].container_port +'</span>  </div>';
                 sdn_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Namespace</span>';
                 sdn_rows += '<span class="tabulardata-content-col tabulardata_namespace">'+ pods[i].namespace +'</span>  </div>';
+                sdn_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Status</span>';
+                if(pods[i].terminated == null)
+                    sdn_rows += '<span class="tabulardata-content-col tabulardata_status">Running</span>  </div>';
+                else
+                    sdn_rows += '<span class="tabulardata-content-col tabulardata_status">Terminated</span>  </div>';
                 sdn_rows += '</div>';
             }
             else if(pods[i].node == "slave01"){
-                console.log("Salve01")
-                slave1_rows += '<div class="tabulardata-header">'+ pods[i].container_name +'</div>';
+                if(pods[i].terminated == null)
+                    slave1_rows += '<div class="tabulardata-header"><i class="material-icons" style="color:green; font-size:25px; padding-top: 5px">check_circle</i><span class="tabulardata_text">'+ pods[i].container_name +'</span></div>';
+                else
+                    slave1_rows += '<div class="tabulardata-header"><i class="material-icons" style="color:#cf2323; font-size:25px; padding-top: 5px">error</i><span class="tabulardata_text">'+ pods[i].container_name +'</span></div>';
                 slave1_rows += '<div class="tabulardata-content">';
                 slave1_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Pod IP</span>';
                 slave1_rows += '<span class="tabulardata-content-col tabulardata_pod_ip">'+ pods[i].pod_ip +'</span>  </div>';
@@ -646,11 +677,18 @@
                 slave1_rows += '<span class="tabulardata-content-col tabulardata_container_port">'+ pods[i].container_port +'</span>  </div>';
                 slave1_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Namespace</span>';
                 slave1_rows += '<span class="tabulardata-content-col tabulardata_namespace">'+ pods[i].namespace +'</span>  </div>';
+                slave1_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Status</span>';
+                if(pods[i].terminated == null)
+                    slave1_rows += '<span class="tabulardata-content-col tabulardata_status">Running</span>  </div>';
+                else
+                    slave1_rows += '<span class="tabulardata-content-col tabulardata_status">Terminated</span>  </div>';
                 slave1_rows += '</div>';
             }
             else if(pods[i].node == "slave02"){
-                console.log("Salve02")
-                slave2_rows += '<div class="tabulardata-header">'+ pods[i].container_name +'</div>';
+                if(pods[i].terminated == null)
+                    slave2_rows += '<div class="tabulardata-header"><i class="material-icons" style="color:green; font-size:25px; padding-top: 5px">check_circle</i><span class="tabulardata_text">'+ pods[i].container_name +'</span></div>';
+                else
+                    slave2_rows += '<div class="tabulardata-header"><i class="material-icons" style="color:#cf2323; font-size:25px; padding-top: 5px">error</i><span class="tabulardata_text">'+ pods[i].container_name +'</span></div>';
                 slave2_rows += '<div class="tabulardata-content">';
                 slave2_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Pod IP</span>';
                 slave2_rows += '<span class="tabulardata-content-col tabulardata_pod_ip">'+ pods[i].pod_ip +'</span>  </div>';
@@ -662,11 +700,19 @@
                 slave2_rows += '<span class="tabulardata-content-col tabulardata_container_port">'+ pods[i].container_port +'</span>  </div>';
                 slave2_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Namespace</span>';
                 slave2_rows += '<span class="tabulardata-content-col tabulardata_namespace">'+ pods[i].namespace +'</span>  </div>';
+                slave2_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Status</span>';
+                if(pods[i].terminated == null)
+                    slave2_rows += '<span class="tabulardata-content-col tabulardata_status">Running</span>  </div>';
+                else
+                    slave2_rows += '<span class="tabulardata-content-col tabulardata_status">Terminated</span>  </div>';
                 slave2_rows += '</div>';
             }
             else if(pods[i].node == "slave03"){
-                console.log("Salve03")
-                slave3_rows += '<div class="tabulardata-header">'+ pods[i].container_name +'</div>';
+                if(pods[i].terminated == null)
+                    slave3_rows += '<div class="tabulardata-header"><i class="material-icons" style="color:green; font-size:25px; padding-top: 5px">check_circle</i><span class="tabulardata_text">'+ pods[i].container_name +'</span></div>';
+                else
+                    slave3_rows += '<div class="tabulardata-header"><i class="material-icons" style="color:#cf2323; font-size:25px; padding-top: 5px">error</i><span class="tabulardata_text">'+ pods[i].container_name +'</span></div>';
+
                 slave3_rows += '<div class="tabulardata-content">';
                 slave3_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Pod IP</span>';
                 slave3_rows += '<span class="tabulardata-content-col tabulardata_pod_ip">'+ pods[i].pod_ip +'</span>  </div>';
@@ -678,6 +724,11 @@
                 slave3_rows += '<span class="tabulardata-content-col tabulardata_container_port">'+ pods[i].container_port +'</span>  </div>';
                 slave3_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Namespace</span>';
                 slave3_rows += '<span class="tabulardata-content-col tabulardata_namespace">'+ pods[i].namespace +'</span>  </div>';
+                slave3_rows += '<div class="tabulardata-row"> <span class="tabulardata-content-col">Status</span>';
+                if(pods[i].terminated == null)
+                    slave3_rows += '<span class="tabulardata-content-col tabulardata_status">Running</span>  </div>';
+                else
+                    slave3_rows += '<span class="tabulardata-content-col tabulardata_status">Terminated</span>  </div>';
                 slave3_rows += '</div>';
             }
         }
@@ -705,6 +756,100 @@
         clusterContentKubernetesSDN.style.display = "none";
     }
 
+    buildGraph("slave01","cpu")
+    buildGraph("slave01","memory")
+    buildGraph("slave02","cpu")
+    buildGraph("slave02","memory")
+    buildGraph("slave03","cpu")
+    buildGraph("slave03","memory")
+    buildGraph("kubernetes-sdn-master","cpu")
+    buildGraph("kubernetes-sdn-master","memory")
+
+    function buildGraph(node,type) {
+        //Real time ==========================================================================================
+        var plot = $.plot('#real_time_chart'+'_'+node+'_'+type, [getValues(node,type)], {
+            series: {
+                shadowSize: 0,
+                color: 'rgb(0, 188, 212)'
+            },
+            grid: {
+                borderColor: '#f3f3f3',
+                borderWidth: 1,
+                tickColor: '#f3f3f3'
+            },
+            lines: {
+                fill: true
+            },
+            yaxis: {
+                min: 0,
+                max: 100
+            },
+            xaxis: {
+                min: 0,
+                max: 100
+            }
+        });
+
+    }
+
+    var usageData = {
+        'slave01' : {
+            'memory' : [],
+            'cpu' : []
+        },
+        'slave02' : {
+            'memory' : [],
+            'cpu' : []
+        },
+        'slave03' : {
+            'memory' : [],
+            'cpu' : []
+        },
+        'kubernetes-sdn-master' : {
+            'memory' : [],
+            'cpu' : []
+        }
+    }
+
+    function getValues(node,type)
+    {
+        return usageData[node][type]
+    }
+    function updateCpuUsage(){
+        // $.ajax({
+        //   url: 'http://localhost:5000/kube-api/graph',
+        //   dataType: 'json',
+        //   type: 'get',
+        //   success: function(resp){
+
+        resp = { metrics:[
+            {'node':'slave01','cpu':'20','memory':'50'}
+            ,
+            {'node':'slave02','cpu':'20','memory':'50'}
+            ,
+            {'node':'slave03','cpu':'20','memory':'50'},
+
+            {'node':'kubernetes-sdn-master','cpu':'20','memory':'50'}]}
+
+        metrics = resp.metrics;
+        for(i=0;i<metrics.length;i++)
+        {
+            var key = metrics[i]['node']
+            if(key in usageData)
+            {
+                usageData[key]['memory'].push([usageData[key]['memory'].length,Number(metrics[i]['memory'])])
+                usageData[key]['cpu'].push([usageData[key]['cpu'].length,Number(metrics[i]['cpu'])])
+
+                if(usageData[key]['memory'].length>100)
+                    usageData[key]['memory'].shift()
+                if(usageData[key]['cpu'].length>100)
+                    usageData[key]['cpu'].shift()
+            }
+        }
+        console.log(usageData)
+        // }
+        // })
+    }
 
     //setInterval('sendRequest()', 50000);
 
