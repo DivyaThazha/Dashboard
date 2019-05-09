@@ -348,11 +348,12 @@
     {
         console.log("Sending request")
         $.ajax({
-            url: 'http://localhost:5000/kube-api/graph',
-            dataType: 'json',
+            url: 'http://130.65.159.69:7000/kube-api/graph',
+            responseType: 'application/json',
             type: 'get',
             cache: true,
             success: function(resp){
+                console.log(resp);  
                 svg1.selectAll("*").remove();
                 data = resp.graph.nodes;
                 console.log(data);
@@ -495,7 +496,7 @@
         console.log(input.id);
 
         $.ajax({
-            url: 'http://localhost:5000/fetch_output_data',
+            url: 'http://130.65.159.69:7000/fetch_output_data',
             dataType: 'json',
             data: {
                 node: input.id
@@ -572,7 +573,7 @@
     function fill_widget_continuous_output(d) {
 
         var rows = "";
-        for (var j = 0; j < d.length && j < 50; j++) {
+        for (var j = 0; j < d.length && j < 100; j++) {
             rows += '<div class="tabulardata-row">'
             rows += '<span class="tabulardata-content-col tabulardata_src_ip">' +d[j]['src_ip'] + '</span>'
             rows += '<span class="tabulardata-content-col tabulardata_src_port">' +d[j]['src_port'] + '</span>'
@@ -617,7 +618,7 @@
 
     function fetch_kubernetes_SDN_pods(){
         $.ajax({
-            url: 'http://localhost:5000/kube-api/pods',
+            url: 'http://130.65.159.69:7000/kube-api/pods',
             dataType: 'json',
             type: 'get',
             cache: true,
@@ -851,7 +852,7 @@
         // })
     }
 
-    //setInterval('sendRequest()', 50000);
+    setInterval('sendRequest1()', 100000);
 
 </script>
 </body>

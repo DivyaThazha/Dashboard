@@ -1,12 +1,16 @@
 #!venv/bin/python3
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from kubernetes import client, config
+import subprocess
+from subprocess import check_output
 import json
 from json import dumps
 import re
 from flask_pymongo import PyMongo
 
 app = Flask(__name__)
+CORS(app)
 '''
 app.config['MONGO_DBNAME'] = 'ml'
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/ml'
@@ -16,19 +20,19 @@ mongo = PyMongo(app)
 
 @app.route('/kube-api/graph', methods=['GET']) # http://localhost:5000/kube-api/graph
 def get_graph():
-    aToken =  "eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWs5NzdyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI2YzRlMmQ2MS02ZDE2LTExZTktOTkwYi0wMDUwNTY5OTFkNGYiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06YWRtaW4tdXNlciJ9.VGvaz_JvrINzDXuDEUCYLK0PVWrgNq-iNpZLUuMoq5YiJSgcMsWfhZwzt0dqrdbrEzj53yMMy0SsSGc9aGRoYTxfdtUnCYYdpvoFsd14NiqBIBVbvglxjL6MhCFAX2nn-wUJH7PLyD5xdB0I2_ieg8Xl9hJe3lKHdeXypRsvi7X3H4j4lGs_ibPVYahHMvoJ4GOAw06HRt6zVhd8OVGXflmVkt0rgC_PsUrCCPMP38J4QSk1hcPt29TUJ7CsNIoE2r6uDShKI6IIq9MbkZy8_UuJvzTA39PWlj9rf_0iIZpkJlyT7kK_NBVQm6I9Ef7XCCJmqtlWDKsgGFUDzuZvAQ"
+    #aToken =  "eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWs5NzdyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI2YzRlMmQ2MS02ZDE2LTExZTktOTkwYi0wMDUwNTY5OTFkNGYiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06YWRtaW4tdXNlciJ9.VGvaz_JvrINzDXuDEUCYLK0PVWrgNq-iNpZLUuMoq5YiJSgcMsWfhZwzt0dqrdbrEzj53yMMy0SsSGc9aGRoYTxfdtUnCYYdpvoFsd14NiqBIBVbvglxjL6MhCFAX2nn-wUJH7PLyD5xdB0I2_ieg8Xl9hJe3lKHdeXypRsvi7X3H4j4lGs_ibPVYahHMvoJ4GOAw06HRt6zVhd8OVGXflmVkt0rgC_PsUrCCPMP38J4QSk1hcPt29TUJ7CsNIoE2r6uDShKI6IIq9MbkZy8_UuJvzTA39PWlj9rf_0iIZpkJlyT7kK_NBVQm6I9Ef7XCCJmqtlWDKsgGFUDzuZvAQ"
 
-    aConfiguration = client.Configuration()
+    #aConfiguration = client.Configuration()
 
-    aConfiguration.host = "https://130.65.159.69"
-    aConfiguration.verify_ssl = False
-    aConfiguration.api_key = {"authorization": "Bearer " + aToken}
+    #aConfiguration.host = "https://130.65.159.69"
+    #aConfiguration.verify_ssl = False
+    #aConfiguration.api_key = {"authorization": "Bearer " + aToken}
 
 
-    aApiClient = client.ApiClient(aConfiguration)
-
-    v1 = client.CoreV1Api(aApiClient)
-
+    #aApiClient = client.ApiClient(aConfiguration)
+    config.load_kube_config()
+    #v1 = client.CoreV1Api(aApiClient)
+    v1 = client.CoreV1Api()
     print("Listing pods with their IPs:")
     ret = v1.list_node(watch=False)
     print(ret)
@@ -97,7 +101,8 @@ def get_output():
     print(request.args.get('node'))
     result =[]
     output = mongo.db.output
-    for x in output.find({'node':request.args.get('node')},{'_id':False}):
+    #for x in output.find({'node':request.args.get('node')},{'_id':False}):
+    for x in output.find({'node':request.args.get('node')},{'_id':False}).limit(100).sort('_id',-1):    
         result.append(x)
 
     attack_result =[]
@@ -114,17 +119,9 @@ def get_output():
 
 @app.route('/kube-api/pods', methods=['GET']) # http://localhost:5000/kube-api/graph
 def get_pods():
-    aToken =  "eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWs5NzdyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI2YzRlMmQ2MS02ZDE2LTExZTktOTkwYi0wMDUwNTY5OTFkNGYiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06YWRtaW4tdXNlciJ9.VGvaz_JvrINzDXuDEUCYLK0PVWrgNq-iNpZLUuMoq5YiJSgcMsWfhZwzt0dqrdbrEzj53yMMy0SsSGc9aGRoYTxfdtUnCYYdpvoFsd14NiqBIBVbvglxjL6MhCFAX2nn-wUJH7PLyD5xdB0I2_ieg8Xl9hJe3lKHdeXypRsvi7X3H4j4lGs_ibPVYahHMvoJ4GOAw06HRt6zVhd8OVGXflmVkt0rgC_PsUrCCPMP38J4QSk1hcPt29TUJ7CsNIoE2r6uDShKI6IIq9MbkZy8_UuJvzTA39PWlj9rf_0iIZpkJlyT7kK_NBVQm6I9Ef7XCCJmqtlWDKsgGFUDzuZvAQ"
 
-    aConfiguration = client.Configuration()
-
-    aConfiguration.host = "https://130.65.159.69"
-    aConfiguration.verify_ssl = False
-    aConfiguration.api_key = {"authorization": "Bearer " + aToken}
-
-    aApiClient = client.ApiClient(aConfiguration)
-
-    v1 = client.CoreV1Api(aApiClient)
+    config.load_kube_config()
+    v1 = client.CoreV1Api()
     ret = v1.list_pod_for_all_namespaces(watch=False)
 
     result = []
@@ -158,8 +155,38 @@ def get_pods():
             temp['waiting'] = None
 
         result.append(temp)
-    print(result)
+    #print(result)
     return jsonify({'pods': result})
 
+@app.route('/kube-api/metrics', methods=['GET']) # http://localhost:5000/kube-api/graph
+def get_metrics():
+
+    a = check_output(["./cpu.sh"])
+
+    #print(a)
+    data = a.decode('utf-8').split('\n')
+    #print(data)
+    result = []
+
+    for line in data:
+        resul = {}
+        if line != '':
+            line = line.split(':')
+            resul['node'] = line[0]
+            #print(line[0])
+            metric = line[1].split(',')
+
+            metric[0] = metric[0].strip().split('%')[0]
+            resul['cpu'] = metric[0]
+            metric[1] = metric[1].strip().split('%')[0]
+            resul['memory'] = metric[1]
+            result.append(resul)
+
+    #print(result)
+
+    return jsonify({'metric': result})
+
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=7000,debug=True)
