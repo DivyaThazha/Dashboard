@@ -326,3 +326,42 @@ span.metricsText {
 span.tabulardata-content-col.tabulardata-content-col_label {
     width: 20%;
 }
+
+.flot-chart{
+    width: 100%;
+    height: 220px;
+}
+.dashboard-flot-chart{
+    height: 275px;
+    width: 100%;
+}
+
+.product-sales-chart {
+    background-color: #1b2a47;
+}
+
+.node {
+    cursor: pointer;
+}
+
+.node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 3px;
+}
+
+.node text {
+    font: 12px sans-serif;
+}
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
+}
+
+.slave1_graph{
+    margin-left: 50px;
+    margin-top: 40px;
+}
+

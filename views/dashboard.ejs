@@ -1,4 +1,4 @@
-<html lang="en-us">
+<html class="no-js" lang="en">
 
 <head>
     <title>SDN</title>
@@ -19,13 +19,27 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="./../stylesheets/fontawesome.css">
+    <link rel="stylesheet" href="./../stylesheets/style1.css">
     <link rel="stylesheet" href="./../stylesheets/style.css">
+
     <link rel="stylesheet" href="./../stylesheets/dashboard.css">
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <script src="js/graph.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/flot/jquery.flot.js"></script>
+    <script src="js/flot/jquery.flot.resize.js"></script>
+    <script src="js/flot/curvedLines.js"></script>
+    <script src="js/flot/flot-active.js"></script>
+    <script src="js/flot/jquery.flot.orderBars.js"></script>
+    <script src="js/flot/jquery.flot.pie.js"></script>
+    <script src="js/flot/jquery.flot.tooltip.min.js"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -53,9 +67,11 @@
 
                     <div class="table-belowheader">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#home"><i class="material-icons" style="font-size:25px">assessment</i></a></li>
+                            <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-tasks" style="font-size:25px"></i></a></li>
                             <li><a data-toggle="tab" href="#menu1"><i class="material-icons" style="font-size:25px">chrome_reader_mode</i></a></li>
                             <li><a data-toggle="tab" href="#menu2"><i class="material-icons" style="font-size:25px">description</i></a></li>
+                            <li><a data-toggle="tab" href="#menu3"><i class="fa fa-bar-chart" style="font-size:25px"></i></a></li>
+                            <li><a data-toggle="tab" href="#menu4"><i class="fa fa-line-chart" style="font-size:25px"></i></a></li>
                         </ul>
                     </div>
                     <div class="table-content">
@@ -122,7 +138,121 @@
 
                                     </div>
                                 </div>
+                            </div>
+                            <div id="menu3" class="tab-pane fade">
+                                <div class="tabheading">CPU Usage</div>
+                                <div class="slave1_graph" id="slave1_graph_cpu">
+                                    <div class="usage_graphs">
+                                        <div class="row clearfix">
+                                            <div class="" style="width: 600px">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <div class="">
+                                                            <h2></h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="body">
+                                                        <div id="real_time_chart_slave01_cpu" class="dashboard-flot-chart"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slave1_graph" id="slave2_graph_cpu">
+                                    <div class="usage_graphs">
+                                        <div class="row clearfix">
+                                            <div class="" style="width: 600px">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <div class="">
+                                                            <h2></h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="body">
+                                                        <div id="real_time_chart_slave02_cpu" class="dashboard-flot-chart"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slave1_graph" id="slave3_graph_cpu">
+                                    <div class="usage_graphs">
+                                        <div class="row clearfix">
+                                            <div class="" style="width: 600px">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <div class="">
+                                                            <h2></h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="body">
+                                                        <div id="real_time_chart_slave03_cpu" class="dashboard-flot-chart"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div id="menu4" class="tab-pane fade">
+                                <div class="tabheading">Memory Usage</div>
+                                <div class="slave1_graph" id="slave1_graph_memory">
+                                    <div class="usage_graphs">
+                                        <div class="row clearfix">
+                                            <div class="" style="width: 600px">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <div class="">
+                                                            <h2></h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="body">
+                                                        <div id="real_time_chart_slave01_memory" class="dashboard-flot-chart"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slave1_graph" id="slave2_graph_memory">
+                                    <div class="usage_graphs">
+                                        <div class="row clearfix">
+                                            <div class="" style="width: 600px">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <div class="">
+                                                            <h2></h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="body">
+                                                        <div id="real_time_chart_slave02_memory" class="dashboard-flot-chart"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slave1_graph" id="slave3_graph_memory">
+                                    <div class="usage_graphs">
+                                        <div class="row clearfix">
+                                            <div class="" style="width: 600px">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <div class="">
+                                                            <h2></h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="body">
+                                                        <div id="real_time_chart_slave03_memory" class="dashboard-flot-chart"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -187,10 +317,12 @@
 
                     <div class="table-belowheader">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#SDN"><i class="material-icons" style="font-size:25px">assessment</i></a></li>
+                            <li class="active"><a data-toggle="tab" href="#SDN"><i class="material-icons" style="font-size:25px">settings</i></a></li>
                             <li><a data-toggle="tab" href="#slave1"><i class="material-icons" style="font-size:25px">filter_1</i></a></li>
                             <li><a data-toggle="tab" href="#slave2"><i class="material-icons" style="font-size:25px">filter_2</i></a></li>
                             <li><a data-toggle="tab" href="#slave3"><i class="material-icons" style="font-size:25px">filter_3</i></a></li>
+                            <li><a data-toggle="tab" href="#slave4"><i class="fa fa-bar-chart" style="font-size:25px"></i></a></li>
+                            <li><a data-toggle="tab" href="#slave5"><i class="fa fa-line-chart" style="font-size:25px"></i></a></li>
                         </ul>
                     </div>
                     <div class="table-content">
@@ -205,7 +337,49 @@
                                 Slave2
                             </div>
                             <div id="slave3" class="tab-pane fade">
-                               Slave3
+                                Slave3
+                            </div>
+                            <div id="slave4" class="tab-pane fade">
+                                <div class="tabheading">CPU Usage</div>
+                                <div class="slave1_graph" id="SDN_graph_cpu">
+                                    <div class="usage_graphs">
+                                        <div class="row clearfix">
+                                            <div class="" style="width: 600px">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <div class="">
+                                                            <h2></h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="body">
+                                                        <div id="real_time_chart_kubernetes-sdn-master_cpu" class="dashboard-flot-chart"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="slave5" class="tab-pane fade">
+                                <div class="tabheading">Memory Usage</div>
+                                <div class="slave1_graph" id="SDN_graph_memory">
+                                    <div class="usage_graphs">
+                                        <div class="row clearfix">
+                                            <div class="" style="width: 600px">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <div class="">
+                                                            <h2></h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="body">
+                                                        <div id="real_time_chart_kubernetes-sdn-master_memory" class="dashboard-flot-chart"><</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -305,7 +479,6 @@
             </div>
         </div>
 
-        <div id="real_time_chart_slave01_cpu" class="dashboard-flot-chart"></div>
 
     </div>
 </section>
@@ -353,7 +526,7 @@
             type: 'get',
             cache: true,
             success: function(resp){
-                console.log(resp);  
+                console.log(resp);
                 svg1.selectAll("*").remove();
                 data = resp.graph.nodes;
                 console.log(data);
@@ -470,6 +643,7 @@
                                 document.querySelector("#clusterContentOpenVSwitch .widgetHeader").innerText = "OpenVSwitch";
                                 clusterContentOpenVSwitch.style.display = "block";
                             }else{
+                                hideOtherGraphs(d);
                                 myCluster.style.display = "block";
                             }
                         })
@@ -632,7 +806,7 @@
             }
         });
     }
-    
+
     function fill_widget_kubernetes_SDN(pods) {
         var sdn_rows = "";
         var slave1_rows = "";
@@ -757,103 +931,43 @@
         clusterContentKubernetesSDN.style.display = "none";
     }
 
-    buildGraph("slave01","cpu")
-    buildGraph("slave01","memory")
-    buildGraph("slave02","cpu")
-    buildGraph("slave02","memory")
-    buildGraph("slave03","cpu")
-    buildGraph("slave03","memory")
-    buildGraph("kubernetes-sdn-master","cpu")
-    buildGraph("kubernetes-sdn-master","memory")
+    function hideOtherGraphs(d) {
 
-    function buildGraph(node,type) {
-        //Real time ==========================================================================================
-        var plot = $.plot('#real_time_chart'+'_'+node+'_'+type, [getValues(node,type)], {
-            series: {
-                shadowSize: 0,
-                color: 'rgb(0, 188, 212)'
-            },
-            grid: {
-                borderColor: '#f3f3f3',
-                borderWidth: 1,
-                tickColor: '#f3f3f3'
-            },
-            lines: {
-                fill: true
-            },
-            yaxis: {
-                min: 0,
-                max: 100
-            },
-            xaxis: {
-                min: 0,
-                max: 100
-            }
-        });
+        var slave1_graph_cpu = document.getElementById("slave1_graph_cpu");
+        slave1_graph_cpu.style.display = "none";
+        var slave2_graph_cpu = document.getElementById("slave2_graph_cpu");
+        slave2_graph_cpu.style.display = "none";
+        var slave3_graph_cpu = document.getElementById("slave3_graph_cpu");
+        slave3_graph_cpu.style.display = "none";
 
-    }
+        var slave1_graph_memory = document.getElementById("slave1_graph_memory");
+        slave1_graph_memory.style.display = "none";
+        var slave2_graph_memory = document.getElementById("slave2_graph_memory");
+        slave2_graph_memory.style.display = "none";
+        var slave3_graph_memory = document.getElementById("slave3_graph_memory");
+        slave3_graph_memory.style.display = "none";
 
-    var usageData = {
-        'slave01' : {
-            'memory' : [],
-            'cpu' : []
-        },
-        'slave02' : {
-            'memory' : [],
-            'cpu' : []
-        },
-        'slave03' : {
-            'memory' : [],
-            'cpu' : []
-        },
-        'kubernetes-sdn-master' : {
-            'memory' : [],
-            'cpu' : []
+
+        if(d.id == "slave01"){
+            slave1_graph_cpu.style.display = "block";
+            slave1_graph_memory.style.display = "block";
+        }
+        else if(d.id == "slave02"){
+            slave2_graph_cpu.style.display = "block";
+            slave2_graph_memory.style.display = "block";
+        }
+        else if(d.id == "slave03"){
+            slave3_graph_cpu.style.display = "block";
+            slave3_graph_memory.style.display = "block";
         }
     }
 
-    function getValues(node,type)
-    {
-        return usageData[node][type]
-    }
-    function updateCpuUsage(){
-        // $.ajax({
-        //   url: 'http://localhost:5000/kube-api/graph',
-        //   dataType: 'json',
-        //   type: 'get',
-        //   success: function(resp){
-
-        resp = { metrics:[
-            {'node':'slave01','cpu':'20','memory':'50'}
-            ,
-            {'node':'slave02','cpu':'20','memory':'50'}
-            ,
-            {'node':'slave03','cpu':'20','memory':'50'},
-
-            {'node':'kubernetes-sdn-master','cpu':'20','memory':'50'}]}
-
-        metrics = resp.metrics;
-        for(i=0;i<metrics.length;i++)
-        {
-            var key = metrics[i]['node']
-            if(key in usageData)
-            {
-                usageData[key]['memory'].push([usageData[key]['memory'].length,Number(metrics[i]['memory'])])
-                usageData[key]['cpu'].push([usageData[key]['cpu'].length,Number(metrics[i]['cpu'])])
-
-                if(usageData[key]['memory'].length>100)
-                    usageData[key]['memory'].shift()
-                if(usageData[key]['cpu'].length>100)
-                    usageData[key]['cpu'].shift()
-            }
-        }
-        console.log(usageData)
-        // }
-        // })
-    }
 
     setInterval('sendRequest1()', 100000);
+    updateCpuUsage();
+    setInterval('updateCpuUsage();', 5000);
 
 </script>
+
 </body>
 </html>
