@@ -365,3 +365,8 @@ span.tabulardata-content-col.tabulardata-content-col_label {
     margin-top: 40px;
 }
 
+
+
+span.tabulardata-content-col.tabulardata_memoryPressure {
+    width: 44%;
+}
